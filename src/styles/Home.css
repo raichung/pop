@@ -132,6 +132,7 @@
 
 .movie-list-title {
   color: azure;
+  margin-top: 20px;
 }
 
 .movie-list-title.active {

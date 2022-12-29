@@ -49,22 +49,30 @@ const HomePage = () => {
   const [previewData, setPreviewData] = useState([]);
 
   useEffect(() => {
-    axios.get("https://yts.mx/api/v2/list_movies.json?quality=3D&minimum_rating=8&limit=5")
-      .then(res => {
-          res.data.data.movies.map((item) => {
-            setPreviewData[{
-              "url": item.url,
-              "title": item.title,
-              "summary": item.summary
-            }]
-        })
+    axios
+      .get(
+        "https://yts.mx/api/v2/list_movies.json?quality=3D&minimum_rating=8&limit=5"
+      )
+      .then((res) => {
+        res.data.data.movies.map((item) => {
+          setPreviewData([
+            ...previewData,
+            {
+              url: item.url,
+              title: item.title,
+              summary: item.summary,
+            },
+          ]);
+        });
         console.log("previews", previewData);
-      console.log("Your new array of modified objects here", previewData)
-    })
-    .catch(err => { console.log('Error', err) })
-  }, [])
+        console.log("Your new array of modified objects here", previewData);
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      });
+  }, []);
 
-  console.log('==', previewData.title);
+  console.log("==", previewData);
 
   return (
     <div className="container">
@@ -150,30 +158,25 @@ const PREVIEW = [
 const SECTIONS = [
   {
     title: "ACTION",
-    fetchURL:
-      "https://yts.mx/api/v2/list_movies.json?genre=action&limit=10",
+    fetchURL: "https://yts.mx/api/v2/list_movies.json?genre=action&limit=10",
   },
   {
     title: "CRIME",
-    fetchURL:
-      "https://yts.mx/api/v2/list_movies.json?genre=crime&limit=10",
+    fetchURL: "https://yts.mx/api/v2/list_movies.json?genre=crime&limit=10",
   },
   {
     title: "DRAMA",
-    fetchURL:
-      "https://yts.mx/api/v2/list_movies.json?genre=drama&limit=10",
+    fetchURL: "https://yts.mx/api/v2/list_movies.json?genre=drama&limit=10",
   },
 ];
 
 const SECTIONS_AGAIN = [
   {
     title: "THRILLER",
-    fetchURL:
-      "https://yts.mx/api/v2/list_movies.json?genre=thriller&limit=10",
+    fetchURL: "https://yts.mx/api/v2/list_movies.json?genre=thriller&limit=10",
   },
   {
     title: "ANIMATION",
-    fetchURL:
-      "https://yts.mx/api/v2/list_movies.json?genre=animation&limit=10",
+    fetchURL: "https://yts.mx/api/v2/list_movies.json?genre=animation&limit=10",
   },
 ];
